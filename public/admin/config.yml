@@ -6,6 +6,7 @@ backend:
   repo: Suhova01/portfolio-site   # например: nastya-suhova/portfolio-site
   branch: main
   base_url: https://decap-proxy.asuhova.workers.dev   # см. README, раздел "Авторизация для CMS"
+  auth_endpoint: /auth
 
 media_folder: "public/images"
 public_folder: "/images"
