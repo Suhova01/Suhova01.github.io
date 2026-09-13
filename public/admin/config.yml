@@ -1,11 +1,9 @@
 # Конфигурация Decap CMS
-# Подробности по бэкендам — см. README.md в корне проекта
-
 backend:
   name: github
-  repo: Suhova01/portfolio-site   # например: nastya-suhova/portfolio-site
+  repo: Suhova01/portfolio-site
   branch: main
-  base_url: https://decap-proxy.asuhova.workers.dev   # см. README, раздел "Авторизация для CMS"
+  base_url: https://decap-proxy.asuhova.workers.dev
   auth_endpoint: /auth
 
 media_folder: "public/images"
@@ -13,18 +11,18 @@ public_folder: "/images"
 
 collections:
   - name: "pages"
-    label: "Страницы сайта"
+    label: "Контент страниц"
     files:
       - name: "home"
-        label: "Главная страница сайта"
+        label: "Главная страница"
         file: "src/content/pages.json"
         file_key: ""
         fields:
-          - { label: "Ключ страницы (не менять)", name: "key", widget: "hidden", default: "" }
-          - { label: "Заголовок сайта", name: "title", widget: "string" }
-          - { label: "Приветствие", name: "eyebrow", widget: "string" }
-          - { label: "Вводный текст", name: "intro", widget: "text" }
-          - label: "Блоки текста (Секции)"
+          - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "" }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Приветствие (Eyebrow)", name: "eyebrow", widget: "string" }
+          - { label: "Вводный text", name: "intro", widget: "text" }
+          - label: "Блоки текста"
             name: "sections"
             widget: "list"
             fields:
@@ -32,52 +30,85 @@ collections:
               - { label: "Текст блока", name: "body", widget: "text" }
           - { label: "Включить форму контактов?", name: "showContactForm", widget: "boolean" }
 
-      - name: "biography"
-        label: "Страница: Информация обо мне"
+      - name: "portfolio_biografiya"
+        label: "Портфолио: Биография"
         file: "src/content/pages.json"
         file_key: "portfolio/biografiya"
         fields:
-          - { label: "Ключ страницы (не менять)", name: "key", widget: "hidden", default: "portfolio/biografiya" }
-          - { label: "Заголовок страницы", name: "title", widget: "string" }
-          - { label: "Надзаголовок", name: "eyebrow", widget: "string" }
-          - label: "Блоки текста (Секции)"
+          - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "portfolio/biografiya" }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Рубрика", name: "eyebrow", widget: "string" }
+          - label: "Блоки текста"
             name: "sections"
             widget: "list"
             fields:
               - { label: "Заголовок блока", name: "heading", widget: "string" }
               - { label: "Текст блока", name: "body", widget: "text" }
 
-      # ПРИМЕЧАНИЕ: Decap CMS "files"-коллекция редактирует файл целиком по заданным полям.
-      # Так как pages.json хранит ВСЕ страницы одним объектом, для удобного редактирования
-      # каждой страницы отдельно рекомендуется разбить его на отдельные файлы:
-      # src/content/pages/home.json, src/content/pages/portfolio-biografiya.json и т.д.
-      # Ниже — пример конфигурации ПОСЛЕ такого разбиения (папка вместо одного файла):
+      - name: "portfolio_dostizheniya"
+        label: "Портфолио: Мои достижения"
+        file: "src/content/pages.json"
+        file_key: "portfolio/dostizheniya"
+        fields:
+          - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "portfolio/dostizheniya" }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Рубрика", name: "eyebrow", widget: "string" }
+          - label: "Блоки текста"
+            name: "sections"
+            widget: "list"
+            fields:
+              - { label: "Заголовок блока", name: "heading", widget: "string" }
+              - { label: "Текст блока", name: "body", widget: "text" }
+          - label: "Фотографии достижений"
+            name: "images"
+            widget: "list"
+            field: { label: "Фото", name: "image", widget: "image" }
 
-  - name: "site_pages"
-    label: "Разделы сайта"
-    folder: "src/content/pages"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Заголовок", name: "title", widget: "string" }
-      - { label: "Рубрика (эйброу)", name: "eyebrow", widget: "string", required: false }
-      - { label: "Вступление", name: "intro", widget: "text", required: false }
-      - label: "Блоки контента"
-        name: "sections"
-        widget: "list"
-        required: false
+      - name: "metodika_razrabotki"
+        label: "Методика: Разработки"
+        file: "src/content/pages.json"
+        file_key: "metodika/razrabotki"
         fields:
-          - { label: "Заголовок блока", name: "heading", widget: "string" }
-          - { label: "Текст", name: "body", widget: "text" }
-      - label: "Фотографии"
-        name: "images"
-        widget: "list"
-        required: false
-        field: { label: "Изображение", name: "image", widget: "image" }
-      - label: "Файлы для скачивания"
-        name: "docs"
-        widget: "list"
-        required: false
+          - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "metodika/razrabotki" }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Рубрика", name: "eyebrow", widget: "string" }
+          - label: "Блоки текста"
+            name: "sections"
+            widget: "list"
+            fields:
+              - { label: "Заголовок блока", name: "heading", widget: "string" }
+              - { label: "Текст блока", name: "body", widget: "text" }
+          - label: "Документы для скачивания"
+            name: "docs"
+            widget: "list"
+            fields:
+              - { label: "Название файла", name: "name", widget: "string" }
+              - { label: "Загрузить файл", name: "url", widget: "file" }
+
+      - name: "gruppa_foto"
+        label: "Моя группа: Фотогалерея"
+        file: "src/content/pages.json"
+        file_key: "gruppa/foto"
         fields:
-          - { label: "Название файла", name: "name", widget: "string" }
-          - { label: "Файл", name: "url", widget: "file" }
+          - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "gruppa/foto" }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Рубрика", name: "eyebrow", widget: "string" }
+          - label: "Загрузить фотографии в галерею"
+            name: "images"
+            widget: "list"
+            field: { label: "Фото", name: "image", widget: "image" }
+
+  - name: "settings"
+    label: "Глобальные настройки"
+    files:
+      - name: "general"
+        label: "Данные профиля воспитателя"
+        file: "src/content/site.json"
+        file_key: "person"
+        fields:
+          - { label: "ФИО Педагога", name: "name", widget: "string" }
+          - { label: "Должность", name: "role", widget: "string" }
+          - { label: "Место работы (Организация)", name: "org", widget: "string" }
+          - { label: "Местоположение", name: "location", widget: "string" }
+          - { label: "Email (для писем)", name: "email", widget: "string" }
+          - { label: "Фотография профиля (Аватар)", name: "photo", widget: "image" }
