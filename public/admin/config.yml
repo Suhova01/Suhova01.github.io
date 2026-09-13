@@ -1,0 +1,56 @@
+# Конфигурация Decap CMS
+# Подробности по бэкендам — см. README.md в корне проекта
+
+backend:
+  name: github
+  repo: ВАШ_АККАУНТ/ВАШ_РЕПОЗИТОРИЙ   # например: nastya-suhova/portfolio-site
+  branch: main
+  base_url: https://ВАШ-OAUTH-PROXY   # см. README, раздел "Авторизация для CMS"
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "pages"
+    label: "Страницы сайта"
+    files:
+      - name: "home"
+        label: "Главная"
+        file: "src/content/pages.json"
+        fields:
+          - { label: "Ключ страницы (не менять)", name: "key", widget: "hidden", default: "" }
+
+      # ПРИМЕЧАНИЕ: Decap CMS "files"-коллекция редактирует файл целиком по заданным полям.
+      # Так как pages.json хранит ВСЕ страницы одним объектом, для удобного редактирования
+      # каждой страницы отдельно рекомендуется разбить его на отдельные файлы:
+      # src/content/pages/home.json, src/content/pages/portfolio-biografiya.json и т.д.
+      # Ниже — пример конфигурации ПОСЛЕ такого разбиения (папка вместо одного файла):
+
+  - name: "site_pages"
+    label: "Разделы сайта"
+    folder: "src/content/pages"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Заголовок", name: "title", widget: "string" }
+      - { label: "Рубрика (эйброу)", name: "eyebrow", widget: "string", required: false }
+      - { label: "Вступление", name: "intro", widget: "text", required: false }
+      - label: "Блоки контента"
+        name: "sections"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Заголовок блока", name: "heading", widget: "string" }
+          - { label: "Текст", name: "body", widget: "text" }
+      - label: "Фотографии"
+        name: "images"
+        widget: "list"
+        required: false
+        field: { label: "Изображение", name: "image", widget: "image" }
+      - label: "Файлы для скачивания"
+        name: "docs"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Название файла", name: "name", widget: "string" }
+          - { label: "Файл", name: "url", widget: "file" }

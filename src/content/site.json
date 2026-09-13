@@ -1,0 +1,51 @@
+{
+  "person": {
+    "name": "Сухова Анастасия Вячеславовна",
+    "role": "Воспитатель",
+    "org": "МБДОУ детский сад №3 «Колокольчик»",
+    "location": "с. Дивеево, Нижегородская область",
+    "email": "stasya080493@yandex.ru",
+    "photo": "/images/profile.jpg"
+  },
+  "nav": [
+    { "label": "Главная", "slug": "" },
+    {
+      "label": "Портфолио",
+      "slug": "portfolio",
+      "children": [
+        { "label": "Информация обо мне", "slug": "portfolio/biografiya" },
+        { "label": "Мои достижения", "slug": "portfolio/dostizheniya" },
+        { "label": "Достижения воспитанников", "slug": "portfolio/dostizheniya-vospitannikov" },
+        { "label": "Конференции, фестивали", "slug": "portfolio/konferentsii" },
+        { "label": "Методические объединения", "slug": "portfolio/metod-obedineniya" },
+        { "label": "Повышение квалификации", "slug": "portfolio/kvalifikatsiya" },
+        { "label": "Саморазвитие", "slug": "portfolio/samorazvitie" },
+        { "label": "Публикации", "slug": "portfolio/publikatsii" }
+      ]
+    },
+    {
+      "label": "Методическая копилка",
+      "slug": "metodika",
+      "children": [
+        { "label": "Методические разработки", "slug": "metodika/razrabotki" },
+        { "label": "Авторские работы", "slug": "metodika/avtorskie-raboty" },
+        { "label": "Мои презентации", "slug": "metodika/prezentatsii" },
+        { "label": "Сценарии праздников", "slug": "metodika/stsenarii" },
+        { "label": "Родительские собрания", "slug": "metodika/roditelskie-sobraniya" },
+        { "label": "Нормативные документы", "slug": "metodika/dokumenty" }
+      ]
+    },
+    { "label": "Для вас, родители", "slug": "roditelyam" },
+    {
+      "label": "Моя группа",
+      "slug": "gruppa",
+      "children": [
+        { "label": "РППС", "slug": "gruppa/rpps" },
+        { "label": "Фотогалерея", "slug": "gruppa/foto" },
+        { "label": "Мини-музеи", "slug": "gruppa/muzei" }
+      ]
+    },
+    { "label": "Видеогалерея", "slug": "video" },
+    { "label": "Полезные ссылки", "slug": "ssylki" }
+  ]
+}
