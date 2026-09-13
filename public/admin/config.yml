@@ -3,9 +3,9 @@
 
 backend:
   name: github
-  repo: ВАШ_АККАУНТ/ВАШ_РЕПОЗИТОРИЙ   # например: nastya-suhova/portfolio-site
+  repo: Suhova01/portfolio-site   # например: nastya-suhova/portfolio-site
   branch: main
-  base_url: https://ВАШ-OAUTH-PROXY   # см. README, раздел "Авторизация для CMS"
+  base_url: https://decap-proxy.asuhova.workers.dev   # см. README, раздел "Авторизация для CMS"
 
 media_folder: "public/images"
 public_folder: "/images"
