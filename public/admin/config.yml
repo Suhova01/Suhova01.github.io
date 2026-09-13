@@ -6,7 +6,7 @@ backend:
   base_url: https://decap-proxy.asuhova.workers.dev
   auth_endpoint: /auth
 
-media_folder: "public/images"
+media_folder: "public / images"
 public_folder: "/images"
 
 collections:
@@ -16,13 +16,13 @@ collections:
       - name: "home"
         label: "Главная страница"
         file: "src/content/pages.json"
-        file_key: ""
+        file_key: "home"
         fields:
-          - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "" }
-          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "home" }
+          - { label: "Заголовок сайта", name: "title", widget: "string" }
           - { label: "Приветствие (Eyebrow)", name: "eyebrow", widget: "string" }
-          - { label: "Вводный text", name: "intro", widget: "text" }
-          - label: "Блоки текста"
+          - { label: "Вводный текст", name: "intro", widget: "text" }
+          - label: "Блоки текста (Секции)"
             name: "sections"
             widget: "list"
             fields:
@@ -36,9 +36,9 @@ collections:
         file_key: "portfolio/biografiya"
         fields:
           - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "portfolio/biografiya" }
-          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Заголовок страницы", name: "title", widget: "string" }
           - { label: "Рубрика", name: "eyebrow", widget: "string" }
-          - label: "Блоки текста"
+          - label: "Блоки текста (Секции)"
             name: "sections"
             widget: "list"
             fields:
@@ -51,9 +51,9 @@ collections:
         file_key: "portfolio/dostizheniya"
         fields:
           - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "portfolio/dostizheniya" }
-          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Заголовок страницы", name: "title", widget: "string" }
           - { label: "Рубрика", name: "eyebrow", widget: "string" }
-          - label: "Блоки текста"
+          - label: "Блоки текста (Секции)"
             name: "sections"
             widget: "list"
             fields:
@@ -70,9 +70,9 @@ collections:
         file_key: "metodika/razrabotki"
         fields:
           - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "metodika/razrabotki" }
-          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Заголовок страницы", name: "title", widget: "string" }
           - { label: "Рубрика", name: "eyebrow", widget: "string" }
-          - label: "Блоки текста"
+          - label: "Блоки текста (Секции)"
             name: "sections"
             widget: "list"
             fields:
@@ -91,7 +91,7 @@ collections:
         file_key: "gruppa/foto"
         fields:
           - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "gruppa/foto" }
-          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Заголовок страницы", name: "title", widget: "string" }
           - { label: "Рубрика", name: "eyebrow", widget: "string" }
           - label: "Загрузить фотографии в галерею"
             name: "images"
