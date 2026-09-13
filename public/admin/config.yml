@@ -14,12 +14,38 @@ public_folder: "/images"
 collections:
   - name: "pages"
     label: "Страницы сайта"
-    files:
+    ffiles:
       - name: "home"
-        label: "Главная"
+        label: "Главная страница сайта"
         file: "src/content/pages.json"
+        file_key: ""
         fields:
           - { label: "Ключ страницы (не менять)", name: "key", widget: "hidden", default: "" }
+          - { label: "Заголовок сайта", name: "title", widget: "string" }
+          - { label: "Приветствие", name: "eyebrow", widget: "string" }
+          - { label: "Вводный текст", name: "intro", widget: "text" }
+          - label: "Блоки текста (Секции)"
+            name: "sections"
+            widget: "list"
+            fields:
+              - { label: "Заголовок блока", name: "heading", widget: "string" }
+              - { label: "Текст блока", name: "body", widget: "text" }
+          - { label: "Включить форму контактов?", name: "showContactForm", widget: "boolean" }
+
+      - name: "biography"
+        label: "Страница: Информация обо мне"
+        file: "src/content/pages.json"
+        file_key: "portfolio/biografiya"
+        fields:
+          - { label: "Ключ страницы (не менять)", name: "key", widget: "hidden", default: "portfolio/biografiya" }
+          - { label: "Заголовок страницы", name: "title", widget: "string" }
+          - { label: "Надзаголовок", name: "eyebrow", widget: "string" }
+          - label: "Блоки текста (Секции)"
+            name: "sections"
+            widget: "list"
+            fields:
+              - { label: "Заголовок блока", name: "heading", widget: "string" }
+              - { label: "Текст блока", name: "body", widget: "text" }
 
       # ПРИМЕЧАНИЕ: Decap CMS "files"-коллекция редактирует файл целиком по заданным полям.
       # Так как pages.json хранит ВСЕ страницы одним объектом, для удобного редактирования
