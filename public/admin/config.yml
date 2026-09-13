@@ -1,9 +1,9 @@
 # Конфигурация Decap CMS
 backend:
   name: github
-  repo: Suhova01/portfolio-site
+  repo: Suhova01 / portfolio-site
   branch: main
-  base_url: https://decap-proxy.asuhova.workers.dev
+  base_url: https: / / decap-proxy.asuhova.workers.dev
   auth_endpoint: /auth
 
 media_folder: "public / images"
@@ -15,10 +15,9 @@ collections:
     files:
       - name: "home"
         label: "Главная страница"
-        file: "src/content/pages.json"
-        file_key: "home"
+        file: "src / content / pages.json"
         fields:
-          - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "home" }
+          - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "" }
           - { label: "Заголовок сайта", name: "title", widget: "string" }
           - { label: "Приветствие (Eyebrow)", name: "eyebrow", widget: "string" }
           - { label: "Вводный текст", name: "intro", widget: "text" }
@@ -32,7 +31,7 @@ collections:
 
       - name: "portfolio_biografiya"
         label: "Портфолио: Биография"
-        file: "src/content/pages.json"
+        file: "src / content / pages.json"
         file_key: "portfolio/biografiya"
         fields:
           - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "portfolio/biografiya" }
@@ -47,7 +46,7 @@ collections:
 
       - name: "portfolio_dostizheniya"
         label: "Портфолио: Мои достижения"
-        file: "src/content/pages.json"
+        file: "src / content / pages.json"
         file_key: "portfolio/dostizheniya"
         fields:
           - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "portfolio/dostizheniya" }
@@ -66,7 +65,7 @@ collections:
 
       - name: "metodika_razrabotki"
         label: "Методика: Разработки"
-        file: "src/content/pages.json"
+        file: "src / content / pages.json"
         file_key: "metodika/razrabotki"
         fields:
           - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "metodika/razrabotki" }
@@ -87,7 +86,7 @@ collections:
 
       - name: "gruppa_foto"
         label: "Моя группа: Фотогалерея"
-        file: "src/content/pages.json"
+        file: "src / content / pages.json"
         file_key: "gruppa/foto"
         fields:
           - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "gruppa/foto" }
@@ -103,7 +102,7 @@ collections:
     files:
       - name: "general"
         label: "Данные профиля воспитателя"
-        file: "src/content/site.json"
+        file: "src / content / site.json"
         file_key: "person"
         fields:
           - { label: "ФИО Педагога", name: "name", widget: "string" }
