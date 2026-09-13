@@ -3,99 +3,99 @@ backend:
   name: github
   repo: Suhova01/portfolio-site
   branch: main
-  base_url: https://decap-proxy.asuhova.workers.dev
+  base_url: https://portfolio-site.asuhova.workers.dev/
   auth_endpoint: /auth
 
 media_folder: "public/images"
 public_folder: "/images"
 
 collections:
-  - name: "pages"
-    label: "Контент страниц"
+  - name: "site_content"
+    label: "Контент сайта"
     files:
-      - name: "home"
-        label: "Главная страница"
+      - name: "all_pages"
+        label: "Все страницы (Редактирование)"
         file: "src/content/pages.json"
         fields:
-          - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "" }
-          - { label: "Заголовок сайта", name: "title", widget: "string" }
-          - { label: "Приветствие (Eyebrow)", name: "eyebrow", widget: "string" }
-          - { label: "Вводный текст", name: "intro", widget: "text" }
-          - label: "Блоки текста (Секции)"
-            name: "sections"
-            widget: "list"
+          # --- ГЛАВНАЯ СТРАНИЦА (Ключ "") ---
+          - label: "🏠 ГЛАВНАЯ СТРАНИЦА"
+            name: ""
+            widget: "object"
             fields:
-              - { label: "Заголовок блока", name: "heading", widget: "string" }
-              - { label: "Текст блока", name: "body", widget: "text" }
-          - { label: "Включить форму контактов?", name: "showContactForm", widget: "boolean" }
+              - { label: "Заголовок сайта", name: "title", widget: "string" }
+              - { label: "Приветствие (Eyebrow)", name: "eyebrow", widget: "string" }
+              - { label: "Вводный текст", name: "intro", widget: "text" }
+              - label: "Блоки текста (Секции)"
+                name: "sections"
+                widget: "list"
+                fields:
+                  - { label: "Заголовок блока", name: "heading", widget: "string" }
+                  - { label: "Текст блока", name: "body", widget: "text" }
+              - { label: "Включить форму контактов?", name: "showContactForm", widget: "boolean" }
 
-      - name: "portfolio_biografiya"
-        label: "Портфолио: Биография"
-        file: "src/content/pages.json"
-        file_key: "portfolio/biografiya"
-        fields:
-          - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "portfolio/biografiya" }
-          - { label: "Заголовок страницы", name: "title", widget: "string" }
-          - { label: "Рубрика", name: "eyebrow", widget: "string" }
-          - label: "Блоки текста (Секции)"
-            name: "sections"
-            widget: "list"
+          # --- ПОРТФОЛИО: БИОГРАФИЯ (Ключ "portfolio/biografiya") ---
+          - label: "👤 ПОРТФОЛИО: Биография"
+            name: "portfolio/biografiya"
+            widget: "object"
             fields:
-              - { label: "Заголовок блока", name: "heading", widget: "string" }
-              - { label: "Текст блока", name: "body", widget: "text" }
+              - { label: "Заголовок страницы", name: "title", widget: "string" }
+              - { label: "Рубрика", name: "eyebrow", widget: "string" }
+              - label: "Блоки текста (Секции)"
+                name: "sections"
+                widget: "list"
+                fields:
+                  - { label: "Заголовок блока", name: "heading", widget: "string" }
+                  - { label: "Текст блока", name: "body", widget: "text" }
 
-      - name: "portfolio_dostizheniya"
-        label: "Портфолио: Мои достижения"
-        file: "src/content/pages.json"
-        file_key: "portfolio/dostizheniya"
-        fields:
-          - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "portfolio/dostizheniya" }
-          - { label: "Заголовок страницы", name: "title", widget: "string" }
-          - { label: "Рубрика", name: "eyebrow", widget: "string" }
-          - label: "Блоки текста (Секции)"
-            name: "sections"
-            widget: "list"
+          # --- ПОРТФОЛИО: ДОСТИЖЕНИЯ (Ключ "portfolio/dostizheniya") ---
+          - label: "🏆 ПОРТФОЛИО: Мои достижения"
+            name: "portfolio/dostizheniya"
+            widget: "object"
             fields:
-              - { label: "Заголовок блока", name: "heading", widget: "string" }
-              - { label: "Текст блока", name: "body", widget: "text" }
-          - label: "Фотографии достижений"
-            name: "images"
-            widget: "list"
-            field: { label: "Фото", name: "image", widget: "image" }
+              - { label: "Заголовок страницы", name: "title", widget: "string" }
+              - { label: "Рубрика", name: "eyebrow", widget: "string" }
+              - label: "Блоки текста (Секции)"
+                name: "sections"
+                widget: "list"
+                fields:
+                  - { label: "Заголовок блока", name: "heading", widget: "string" }
+                  - { label: "Текст блока", name: "body", widget: "text" }
+              - label: "Фотографии достижений"
+                name: "images"
+                widget: "list"
+                field: { label: "Фото", name: "image", widget: "image" }
 
-      - name: "metodika_razrabotki"
-        label: "Методика: Разработки"
-        file: "src/content/pages.json"
-        file_key: "metodika/razrabotki"
-        fields:
-          - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "metodika/razrabotki" }
-          - { label: "Заголовок страницы", name: "title", widget: "string" }
-          - { label: "Рубрика", name: "eyebrow", widget: "string" }
-          - label: "Блоки текста (Секции)"
-            name: "sections"
-            widget: "list"
+          # --- МЕТОДИКА: РАЗРАБОТКИ (Ключ "metodika/razrabotki") ---
+          - label: "📚 МЕТОДИКА: Разработки"
+            name: "metodika/razrabotki"
+            widget: "object"
             fields:
-              - { label: "Заголовок блока", name: "heading", widget: "string" }
-              - { label: "Текст блока", name: "body", widget: "text" }
-          - label: "Документы для скачивания"
-            name: "docs"
-            widget: "list"
-            fields:
-              - { label: "Название файла", name: "name", widget: "string" }
-              - { label: "Загрузить файл", name: "url", widget: "file" }
+              - { label: "Заголовок страницы", name: "title", widget: "string" }
+              - { label: "Рубрика", name: "eyebrow", widget: "string" }
+              - label: "Блоки текста (Секции)"
+                name: "sections"
+                widget: "list"
+                fields:
+                  - { label: "Заголовок блока", name: "heading", widget: "string" }
+                  - { label: "Текст блока", name: "body", widget: "text" }
+              - label: "Документы для скачивания"
+                name: "docs"
+                widget: "list"
+                fields:
+                  - { label: "Название файла", name: "name", widget: "string" }
+                  - { label: "Загрузить файл", name: "url", widget: "file" }
 
-      - name: "gruppa_foto"
-        label: "Моя группа: Фотогалерея"
-        file: "src/content/pages.json"
-        file_key: "gruppa/foto"
-        fields:
-          - { label: "Ключ (Не менять)", name: "key", widget: "hidden", default: "gruppa/foto" }
-          - { label: "Заголовок страницы", name: "title", widget: "string" }
-          - { label: "Рубрика", name: "eyebrow", widget: "string" }
-          - label: "Загрузить фотографии в галерею"
-            name: "images"
-            widget: "list"
-            field: { label: "Фото", name: "image", widget: "image" }
+          # --- МОЯ ГРУППА: ФОТОГАЛЕРЕЯ (Ключ "gruppa/foto") ---
+          - label: "📷 МОЯ ГРУППА: Фотогалерея"
+            name: "gruppa/foto"
+            widget: "object"
+            fields:
+              - { label: "Заголовок страницы", name: "title", widget: "string" }
+              - { label: "Рубрика", name: "eyebrow", widget: "string" }
+              - label: "Загрузить фотографии в галерею"
+                name: "images"
+                widget: "list"
+                field: { label: "Фото", name: "image", widget: "image" }
 
   - name: "settings"
     label: "Глобальные настройки"
