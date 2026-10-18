@@ -1,13 +1,14 @@
 import { useState } from 'react'
 
 // Подключите свой access_key от web3forms.com (бесплатно) — без своего бэкенда
-const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY'
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY
 
 export default function ContactForm() {
   const [status, setStatus] = useState('idle')
 
   async function handleSubmit(e) {
     e.preventDefault()
+    if (!WEB3FORMS_KEY) { setStatus('error'); return }
     setStatus('sending')
     const formData = new FormData(e.target)
     formData.append('access_key', WEB3FORMS_KEY)

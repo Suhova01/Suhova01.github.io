@@ -1,13 +1,19 @@
+import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import site from '../content/site.json'
 
 export default function Sidebar({ open }) {
   const { person, nav } = site
+  const [noPhoto, setNoPhoto] = useState(false)
 
   return (
     <aside className={`sidebar${open ? ' open' : ''}`}>
       <div className="sidebar-identity">
-        <img className="sidebar-photo" src={person.photo} alt={person.name} />
+        {person.photo && !noPhoto ? (
+          <img className="sidebar-photo" src={person.photo} alt={person.name} onError={() => setNoPhoto(true)} />
+        ) : (
+          <div className="sidebar-photo" aria-hidden="true">🔔</div>
+        )}
         <div className="sidebar-name">{person.name}</div>
         <div className="sidebar-role">{person.role}</div>
         <div className="sidebar-role">{person.org}</div>

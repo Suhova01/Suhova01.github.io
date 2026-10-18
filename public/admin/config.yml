@@ -1,113 +1,166 @@
-# Конфигурация Decap CMS
+# Decap CMS: одна страница = один файл в src/content/pages
 backend:
   name: github
   repo: Suhova01/portfolio-site
   branch: main
-  base_url: https://portfolio-site.asuhova.workers.dev/
-  auth_endpoint: /auth
-
-media_folder: "public/images"
-public_folder: "/images"
-
+  base_url: https://decap-proxy.asuhova.workers.dev
+  auth_endpoint: auth
+locale: ru
+local_backend: true   # локально: npx decap-server, тогда вход через GitHub не нужен
+media_folder: public/images
+public_folder: /images
 collections:
-  - name: "site_content"
-    label: "Контент сайта"
+  - name: pages
+    label: Страницы сайта
     files:
-      - name: "all_pages"
-        label: "Все страницы (Редактирование)"
-        file: "src/content/pages.json"
-        fields:
-          # --- ГЛАВНАЯ СТРАНИЦА (Ключ "") ---
-          - label: "🏠 ГЛАВНАЯ СТРАНИЦА"
-            name: ""
-            widget: "object"
+      - name: "home"
+        label: "Главная"
+        file: "src/content/pages/home.json"
+        fields: &page_fields
+          - {label: "Заголовок", name: title, widget: string}
+          - {label: "Рубрика над заголовком", name: eyebrow, widget: string, required: false}
+          - {label: "Вводный текст", name: intro, widget: text, required: false}
+          - label: "Блоки текста"
+            name: sections
+            widget: list
+            required: false
             fields:
-              - { label: "Заголовок сайта", name: "title", widget: "string" }
-              - { label: "Приветствие (Eyebrow)", name: "eyebrow", widget: "string" }
-              - { label: "Вводный текст", name: "intro", widget: "text" }
-              - label: "Блоки текста (Секции)"
-                name: "sections"
-                widget: "list"
+              - {label: "Заголовок блока", name: heading, widget: string}
+              - {label: "Текст", name: body, widget: text, required: false}
+              - label: "Ссылки"
+                name: links
+                widget: list
+                required: false
                 fields:
-                  - { label: "Заголовок блока", name: "heading", widget: "string" }
-                  - { label: "Текст блока", name: "body", widget: "text" }
-              - { label: "Включить форму контактов?", name: "showContactForm", widget: "boolean" }
-
-          # --- ПОРТФОЛИО: БИОГРАФИЯ (Ключ "portfolio/biografiya") ---
-          - label: "👤 ПОРТФОЛИО: Биография"
-            name: "portfolio/biografiya"
-            widget: "object"
+                  - {label: "Название", name: title, widget: string}
+                  - {label: "Адрес", name: url, widget: string}
+              - label: "Документы"
+                name: docs
+                widget: list
+                required: false
+                fields:
+                  - {label: "Название", name: name, widget: string}
+                  - {label: "Файл", name: url, widget: file, required: false}
+          - label: "Фотографии"
+            name: images
+            widget: list
+            required: false
+            field: {label: "Фото", name: image, widget: image}
+          - label: "Документы для скачивания"
+            name: docs
+            widget: list
+            required: false
             fields:
-              - { label: "Заголовок страницы", name: "title", widget: "string" }
-              - { label: "Рубрика", name: "eyebrow", widget: "string" }
-              - label: "Блоки текста (Секции)"
-                name: "sections"
-                widget: "list"
-                fields:
-                  - { label: "Заголовок блока", name: "heading", widget: "string" }
-                  - { label: "Текст блока", name: "body", widget: "text" }
-
-          # --- ПОРТФОЛИО: ДОСТИЖЕНИЯ (Ключ "portfolio/dostizheniya") ---
-          - label: "🏆 ПОРТФОЛИО: Мои достижения"
-            name: "portfolio/dostizheniya"
-            widget: "object"
-            fields:
-              - { label: "Заголовок страницы", name: "title", widget: "string" }
-              - { label: "Рубрика", name: "eyebrow", widget: "string" }
-              - label: "Блоки текста (Секции)"
-                name: "sections"
-                widget: "list"
-                fields:
-                  - { label: "Заголовок блока", name: "heading", widget: "string" }
-                  - { label: "Текст блока", name: "body", widget: "text" }
-              - label: "Фотографии достижений"
-                name: "images"
-                widget: "list"
-                field: { label: "Фото", name: "image", widget: "image" }
-
-          # --- МЕТОДИКА: РАЗРАБОТКИ (Ключ "metodika/razrabotki") ---
-          - label: "📚 МЕТОДИКА: Разработки"
-            name: "metodika/razrabotki"
-            widget: "object"
-            fields:
-              - { label: "Заголовок страницы", name: "title", widget: "string" }
-              - { label: "Рубрика", name: "eyebrow", widget: "string" }
-              - label: "Блоки текста (Секции)"
-                name: "sections"
-                widget: "list"
-                fields:
-                  - { label: "Заголовок блока", name: "heading", widget: "string" }
-                  - { label: "Текст блока", name: "body", widget: "text" }
-              - label: "Документы для скачивания"
-                name: "docs"
-                widget: "list"
-                fields:
-                  - { label: "Название файла", name: "name", widget: "string" }
-                  - { label: "Загрузить файл", name: "url", widget: "file" }
-
-          # --- МОЯ ГРУППА: ФОТОГАЛЕРЕЯ (Ключ "gruppa/foto") ---
-          - label: "📷 МОЯ ГРУППА: Фотогалерея"
-            name: "gruppa/foto"
-            widget: "object"
-            fields:
-              - { label: "Заголовок страницы", name: "title", widget: "string" }
-              - { label: "Рубрика", name: "eyebrow", widget: "string" }
-              - label: "Загрузить фотографии в галерею"
-                name: "images"
-                widget: "list"
-                field: { label: "Фото", name: "image", widget: "image" }
-
-  - name: "settings"
-    label: "Глобальные настройки"
+              - {label: "Название", name: name, widget: string}
+              - {label: "Файл", name: url, widget: file, required: false}
+          - {label: "Показать форму обратной связи", name: showContactForm, widget: boolean, required: false, default: false}
+          - {label: "Раздел-хаб (список подразделов)", name: children, widget: boolean, required: false, default: false}
+      - name: "portfolio"
+        label: "Портфолио"
+        file: "src/content/pages/portfolio.json"
+        fields: *page_fields
+      - name: "portfolio-biografiya"
+        label: "Портфолио / Информация обо мне"
+        file: "src/content/pages/portfolio/biografiya.json"
+        fields: *page_fields
+      - name: "portfolio-dostizheniya"
+        label: "Портфолио / Мои достижения"
+        file: "src/content/pages/portfolio/dostizheniya.json"
+        fields: *page_fields
+      - name: "portfolio-dostizheniya-vospitannikov"
+        label: "Портфолио / Достижения воспитанников"
+        file: "src/content/pages/portfolio/dostizheniya-vospitannikov.json"
+        fields: *page_fields
+      - name: "portfolio-konferentsii"
+        label: "Портфолио / Конференции, фестивали"
+        file: "src/content/pages/portfolio/konferentsii.json"
+        fields: *page_fields
+      - name: "portfolio-metod-obedineniya"
+        label: "Портфолио / Методические объединения"
+        file: "src/content/pages/portfolio/metod-obedineniya.json"
+        fields: *page_fields
+      - name: "portfolio-kvalifikatsiya"
+        label: "Портфолио / Повышение квалификации"
+        file: "src/content/pages/portfolio/kvalifikatsiya.json"
+        fields: *page_fields
+      - name: "portfolio-samorazvitie"
+        label: "Портфолио / Саморазвитие"
+        file: "src/content/pages/portfolio/samorazvitie.json"
+        fields: *page_fields
+      - name: "portfolio-publikatsii"
+        label: "Портфолио / Публикации"
+        file: "src/content/pages/portfolio/publikatsii.json"
+        fields: *page_fields
+      - name: "metodika"
+        label: "Методическая копилка"
+        file: "src/content/pages/metodika.json"
+        fields: *page_fields
+      - name: "metodika-razrabotki"
+        label: "Методическая копилка / Методические разработки"
+        file: "src/content/pages/metodika/razrabotki.json"
+        fields: *page_fields
+      - name: "metodika-avtorskie-raboty"
+        label: "Методическая копилка / Авторские работы"
+        file: "src/content/pages/metodika/avtorskie-raboty.json"
+        fields: *page_fields
+      - name: "metodika-prezentatsii"
+        label: "Методическая копилка / Мои презентации"
+        file: "src/content/pages/metodika/prezentatsii.json"
+        fields: *page_fields
+      - name: "metodika-stsenarii"
+        label: "Методическая копилка / Сценарии праздников"
+        file: "src/content/pages/metodika/stsenarii.json"
+        fields: *page_fields
+      - name: "metodika-roditelskie-sobraniya"
+        label: "Методическая копилка / Родительские собрания"
+        file: "src/content/pages/metodika/roditelskie-sobraniya.json"
+        fields: *page_fields
+      - name: "metodika-dokumenty"
+        label: "Методическая копилка / Нормативные документы"
+        file: "src/content/pages/metodika/dokumenty.json"
+        fields: *page_fields
+      - name: "roditelyam"
+        label: "Для вас, родители"
+        file: "src/content/pages/roditelyam.json"
+        fields: *page_fields
+      - name: "gruppa"
+        label: "Моя группа"
+        file: "src/content/pages/gruppa.json"
+        fields: *page_fields
+      - name: "gruppa-rpps"
+        label: "Моя группа / РППС"
+        file: "src/content/pages/gruppa/rpps.json"
+        fields: *page_fields
+      - name: "gruppa-foto"
+        label: "Моя группа / Фотогалерея"
+        file: "src/content/pages/gruppa/foto.json"
+        fields: *page_fields
+      - name: "gruppa-muzei"
+        label: "Моя группа / Мини-музеи"
+        file: "src/content/pages/gruppa/muzei.json"
+        fields: *page_fields
+      - name: "video"
+        label: "Видеогалерея"
+        file: "src/content/pages/video.json"
+        fields: *page_fields
+      - name: "ssylki"
+        label: "Полезные ссылки"
+        file: "src/content/pages/ssylki.json"
+        fields: *page_fields
+  - name: settings
+    label: Настройки
     files:
-      - name: "general"
-        label: "Данные профиля воспитателя"
+      - name: profile
+        label: "Профиль воспитателя"
         file: "src/content/site.json"
-        file_key: "person"
         fields:
-          - { label: "ФИО Педагога", name: "name", widget: "string" }
-          - { label: "Должность", name: "role", widget: "string" }
-          - { label: "Место работы (Организация)", name: "org", widget: "string" }
-          - { label: "Местоположение", name: "location", widget: "string" }
-          - { label: "Email (для писем)", name: "email", widget: "string" }
-          - { label: "Фотография профиля (Аватар)", name: "photo", widget: "image" }
+          - label: "Профиль"
+            name: person
+            widget: object
+            fields:
+              - {label: "ФИО", name: name, widget: string}
+              - {label: "Должность", name: role, widget: string}
+              - {label: "Место работы", name: org, widget: string}
+              - {label: "Местоположение", name: location, widget: string}
+              - {label: "Эл. почта", name: email, widget: string}
+              - {label: "Фото профиля", name: photo, widget: image, required: false}

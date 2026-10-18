@@ -1,0 +1,136 @@
+{
+  "title": "Полезные ссылки",
+  "eyebrow": "Раздел",
+  "sections": [
+    {
+      "heading": "Детям",
+      "links": [
+        {
+          "title": "Смешарики. Азбука безопасности",
+          "url": "https://disk.yandex.ru/i/jkV4GGoV4zTt6g"
+        },
+        {
+          "title": "Играемся: развивающие онлайн-игры",
+          "url": "https://www.igraemsa.ru/"
+        },
+        {
+          "title": "Орлята.ру: игры, стихи, мультфильмы",
+          "url": "http://www.orljata.ru/"
+        },
+        {
+          "title": "Игры на внимание и память для детей 3 лет",
+          "url": "https://iqsha.ru/uprazhneniya/topic/vnimanie-i-pamyat/3-goda"
+        }
+      ]
+    },
+    {
+      "heading": "Родителям",
+      "links": [
+        {
+          "title": "7я.ru",
+          "url": "https://www.7ya.ru/"
+        },
+        {
+          "title": "Я родитель",
+          "url": "https://www.ya-roditel.ru/"
+        },
+        {
+          "title": "мультиМама",
+          "url": "https://multi-mama.ru/"
+        }
+      ]
+    },
+    {
+      "heading": "Педагогам",
+      "links": [
+        {
+          "title": "Подготовка детей к школе (группа ВК)",
+          "url": "https://vk.com/smart_deti"
+        },
+        {
+          "title": "melkie.net: советы педагогам и родителям",
+          "url": "https://melkie.net/"
+        },
+        {
+          "title": "Зайка-развивайка (группа ВК)",
+          "url": "https://vk.com/zaykinaskazka"
+        },
+        {
+          "title": "Маам.ру (группа ВК)",
+          "url": "https://vk.com/maam_vk"
+        },
+        {
+          "title": "Совушкина лавка (группа ВК)",
+          "url": "https://vk.com/sova_toys"
+        }
+      ]
+    },
+    {
+      "heading": "Федеральные ресурсы",
+      "links": [
+        {
+          "title": "Министерство просвещения РФ",
+          "url": "https://edu.gov.ru/"
+        },
+        {
+          "title": "Рособрнадзор",
+          "url": "https://obrnadzor.gov.ru/"
+        },
+        {
+          "title": "Федеральный портал «Российское образование»",
+          "url": "https://edu.ru/documents/"
+        }
+      ]
+    },
+    {
+      "heading": "Нижегородская область",
+      "links": [
+        {
+          "title": "Министерство образования, науки и молодёжной политики",
+          "url": "https://minobr.government-nnov.ru/"
+        },
+        {
+          "title": "Портал образовательных услуг",
+          "url": "https://portal.gounn.ru/"
+        },
+        {
+          "title": "Нижегородский институт развития образования",
+          "url": "http://niro.nnov.ru/"
+        },
+        {
+          "title": "Система дистанционного обучения НИРО",
+          "url": "https://sdo.gounn.ru/"
+        },
+        {
+          "title": "Журнал «Нижегородское образование»",
+          "url": "http://nizhobr.nironn.ru/"
+        }
+      ]
+    },
+    {
+      "heading": "Дошкольное образование онлайн",
+      "links": [
+        {
+          "title": "Журнал «Современное дошкольное образование»",
+          "url": "https://sdo-journal.ru/"
+        },
+        {
+          "title": "Журнал «Дошкольник»",
+          "url": "http://doshkolnik.ru/"
+        },
+        {
+          "title": "Образовательная социальная сеть",
+          "url": "https://nsportal.ru/"
+        },
+        {
+          "title": "Детский сад.ru",
+          "url": "http://www.detskiysad.ru/"
+        },
+        {
+          "title": "Центр «Адалин»",
+          "url": "https://adalin.mospsy.ru/"
+        }
+      ]
+    }
+  ]
+}

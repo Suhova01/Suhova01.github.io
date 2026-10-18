@@ -1,5 +1,11 @@
 import { useParams, Link } from 'react-router-dom'
-import pages from '../content/pages.json'
+import Hero from '../components/Hero'
+
+const pages = {}
+for (const [path, mod] of Object.entries(import.meta.glob('../content/pages/**/*.json', { eager: true }))) {
+  const slug = path.replace('../content/pages/', '').replace(/\.json$/, '')
+  pages[slug === 'home' ? '' : slug] = mod.default
+}
 import site from '../content/site.json'
 import ContactForm from '../components/ContactForm'
 
@@ -12,6 +18,31 @@ function findNavItem(slug) {
     }
   }
   return null
+}
+
+function DocList({ docs }) {
+  if (!docs?.length) return null
+  return (
+    <ul className="doc-list">
+      {docs.map((doc, i) => (
+        <li key={i}>
+          {doc.url ? <a href={doc.url}>{doc.name}</a> : <span>{doc.name}</span>}
+          <span className="muted">{doc.url ? 'Скачать' : 'Файл скоро появится'}</span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+function LinkList({ links }) {
+  if (!links?.length) return null
+  return (
+    <ul className="link-list">
+      {links.map((l, i) => (
+        <li key={i}><a href={l.url} target="_blank" rel="noopener noreferrer">{l.title}</a></li>
+      ))}
+    </ul>
+  )
 }
 
 export default function Page() {
@@ -32,11 +63,15 @@ export default function Page() {
 
   return (
     <article>
-      <div className="page-header">
-        {data.eyebrow && <div className="eyebrow">{data.eyebrow}</div>}
-        <h1>{data.title}</h1>
-        {data.intro && <p className="muted">{data.intro}</p>}
-      </div>
+      {slug === '' ? (
+        <Hero title={data.title} intro={data.intro} />
+      ) : (
+        <div className="page-header">
+          {data.eyebrow && <div className="eyebrow">{data.eyebrow}</div>}
+          <h1>{data.title}</h1>
+          {data.intro && <p className="muted">{data.intro}</p>}
+        </div>
+      )}
 
       {/* Раздел-хаб: показываем ссылки на дочерние страницы */}
       {data.children && navItem?.children && (
@@ -53,7 +88,9 @@ export default function Page() {
       {data.sections?.map((section, i) => (
         <div className="section" key={i}>
           <h2>{section.heading}</h2>
-          <p>{section.body}</p>
+          {section.body && <p className="prose">{section.body}</p>}
+          <LinkList links={section.links} />
+          <DocList docs={section.docs} />
         </div>
       ))}
 
@@ -65,16 +102,7 @@ export default function Page() {
         </div>
       )}
 
-      {data.docs?.length > 0 && (
-        <ul className="doc-list">
-          {data.docs.map((doc, i) => (
-            <li key={i}>
-              <a href={doc.url}>{doc.name}</a>
-              <span className="muted">Скачать</span>
-            </li>
-          ))}
-        </ul>
-      )}
+      <DocList docs={data.docs} />
 
       {data.showContactForm && (
         <div className="section">
