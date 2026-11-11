@@ -10,7 +10,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 backend:
   name: github
-  repo: Suhova01/portfolio-site
+  repo: Suhova01/Suhova01.github.io
   branch: main
   base_url: https://decap-proxy.asuhova.workers.dev
   auth_endpoint: auth
