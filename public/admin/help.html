@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Как пользоваться</title>
+  <link rel="icon" type="image/svg+xml" href="/admin/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;700&family=Unbounded:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#f5f3ff;--ink:#1b1747;--mut:#5d5883;--card:#fff;--violet:#5b4bdb;--sun:#ffd23f;--grass:#3dbe8b;--pink:#ff8fb1;--line:#e1dcff}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font:400 18px/1.6 Onest,system-ui,sans-serif}
+    main{max-width:820px;margin:0 auto;padding:40px 16px 80px}
+    h1,h2{font-family:Unbounded,'Arial Black',sans-serif;letter-spacing:-.02em;line-height:1.15}
+    h1{font-size:clamp(1.8rem,5vw,2.6rem);margin:0 0 .3em}
+    h2{font-size:1.3rem;margin:0 0 .6em;display:flex;gap:12px;align-items:center}
+    .lead{color:var(--mut);font-size:1.1rem;margin:0 0 30px}
+    .top{display:flex;gap:20px;align-items:center;margin-bottom:10px}
+    .top img{width:72px;flex:none;rotate:-8deg}
+    .step{background:var(--card);border-radius:28px;padding:26px 28px;margin:0 0 18px;box-shadow:0 5px 0 var(--line)}
+    .num{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--sun);font:900 1.1rem Unbounded,sans-serif}
+    .step p{margin:0 0 .7em}
+    .step p:last-child{margin-bottom:0}
+    ol.mini{margin:.4em 0 0;padding-left:1.3em}
+    ol.mini li{margin:.35em 0}
+    .btn{display:inline-block;font-weight:700;font-size:.95rem;padding:4px 14px;border-radius:99px;white-space:nowrap;vertical-align:1px}
+    .b-sun{background:var(--sun);color:var(--ink)}
+    .b-violet{background:var(--violet);color:#fff}
+    .b-green{background:var(--grass);color:#fff}
+    .b-soft{background:#e8e5f7;color:var(--ink)}
+    .tip{border-radius:22px;padding:18px 22px;margin:14px 0 0;background:#fff8d6}
+    .tip.ok{background:#e3f7ee}
+    .tip.warn{background:#ffe6ee}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:10px}
+    .grid div{background:var(--bg);border-radius:18px;padding:12px 16px;font-size:.95rem}
+    a{color:var(--violet);font-weight:700}
+    .back{display:inline-block;margin-top:20px;background:var(--violet);color:#fff;text-decoration:none;padding:14px 26px;border-radius:99px;box-shadow:0 5px 0 #3a2fa3}
+    @media (prefers-color-scheme:dark){
+      :root{--bg:#14112e;--ink:#f3f0ff;--mut:#b4aed8;--card:#211c47;--line:#2d2760}
+      .tip{background:#3a3415}.tip.ok{background:#143a2b}.tip.warn{background:#3d1a28}
+      .b-soft{background:#2d2760;color:var(--ink)}
+      .b-sun{color:#1b1747}
+      a{color:#b9b0ff}
+    }
+  </style>
+</head>
+<body>
+<main>
+  <div class="top">
+    <img src="/admin/logo.svg" alt="" />
+    <div>
+      <h1>Как менять сайт</h1>
+      <p class="lead">Всё делается мышкой, за пару минут. Сломать сайт нельзя — не бойтесь пробовать.</p>
+    </div>
+  </div>
+
+  <section class="step">
+    <h2><span class="num">1</span> Откройте нужную страницу</h2>
+    <p>Слева — <b>разделы сайта</b>, такие же, как в меню на сайте: 🏠 Главная, 📁 Портфолио, 🧸 Моя группа…</p>
+    <ol class="mini">
+      <li>Нажмите на раздел слева.</li>
+      <li>Справа появятся страницы. У нужной нажмите <span class="btn b-sun">Изменить ✏️</span></li>
+    </ol>
+    <div class="tip">👩‍🏫 Своё фото, имя и почту меняйте в разделе <b>«Обо мне»</b>.</div>
+  </section>
+
+  <section class="step">
+    <h2><span class="num">2</span> Поменяйте текст</h2>
+    <p>Слева — поля для текста, справа — <b>как это будет выглядеть на сайте</b>. Пишите прямо в поля, справа всё сразу меняется.</p>
+    <p>Страница состоит из <b>блоков</b>. У каждого блока есть заголовок и текст.</p>
+    <ol class="mini">
+      <li>Чтобы открыть блок — нажмите на его название.</li>
+      <li>Новый блок — кнопка <span class="btn b-violet">Добавить блок +</span></li>
+      <li>Удалить блок — крестик <b>✕</b> справа от него.</li>
+      <li>Поменять блоки местами — потяните за полоски <b>═</b> сверху блока.</li>
+    </ol>
+  </section>
+
+  <section class="step">
+    <h2><span class="num">3</span> Добавьте фото 📸</h2>
+    <p>Фото добавляются <b>внутрь блока</b>. Откройте блок и найдите «🖼️ Фотографии».</p>
+    <ol class="mini">
+      <li>Нажмите <span class="btn b-violet">Добавить фото +</span></li>
+      <li>Нажмите <span class="btn b-sun">Выберите изображение</span></li>
+      <li>В окошке нажмите <span class="btn b-sun">📤 1. Загрузить с компьютера</span> и выберите снимок.</li>
+      <li>Нажмите <span class="btn b-green">✅ 2. Вставить выбранное</span></li>
+      <li>Если хотите — напишите подпись под фото.</li>
+    </ol>
+    <div class="tip">💡 Хотите сразу много фото? Повторите шаги для каждого снимка. Уже загруженные фото лежат в окошке — их можно просто выбрать и вставить ещё раз.</div>
+    <div class="tip warn">📏 Большие фото с телефона (больше 3 МБ) сайт открывает медленно. Перед загрузкой их удобно уменьшить, например на сайте <a href="https://squoosh.app" target="_blank" rel="noopener">squoosh.app</a>.</div>
+  </section>
+
+  <section class="step">
+    <h2><span class="num">4</span> Ссылки, видео и файлы</h2>
+    <div class="grid">
+      <div><b>🔗 Ссылка или видео</b><br>В блоке «Ссылки» → <span class="btn b-violet">Добавить ссылку +</span> → напишите название и вставьте адрес (начинается с https://). Видео сначала загрузите на YouTube, ВК или Яндекс.Диск.</div>
+      <div><b>📎 Файл (Word, PDF, презентация)</b><br>В блоке «Файлы для скачивания» → <span class="btn b-violet">Добавить файл +</span> → название → <span class="btn b-sun">Выберите файл</span> → загрузите → вставьте.</div>
+    </div>
+  </section>
+
+  <section class="step">
+    <h2><span class="num">5</span> Опубликуйте ✅</h2>
+    <p>Пока вы не опубликуете — изменения видите только вы.</p>
+    <ol class="mini">
+      <li>Нажмите зелёную кнопку <span class="btn b-green">Опубликовать</span> вверху.</li>
+      <li>Под ней нажмите <span class="btn b-soft">Опубликовать сейчас</span></li>
+    </ol>
+    <div class="tip ok">⏱️ Сайт обновится сам примерно <b>через 1–2 минуты</b>. Если не видно изменений — обновите страницу сайта.</div>
+  </section>
+
+  <section class="step">
+    <h2><span class="num">?</span> Если что-то пошло не так</h2>
+    <div class="grid">
+      <div><b>Случайно что-то стёрла</b><br>Если ещё не опубликовали — нажмите стрелку ← слева вверху и согласитесь уйти без сохранения. Если потом спросят про «резервную копию» — нажмите «Отмена». Всё вернётся как было.</div>
+      <div><b>Красная надпись у поля</b><br>Это поле нужно заполнить (например, заголовок блока) или адрес ссылки написан с ошибкой.</div>
+      <div><b>Просит войти</b><br>Нажмите «Войти через GitHub» — это нормально, так бывает, например, на новом компьютере.</div>
+      <div><b>Ничего не помогает</b><br>Напишите тому, кто делал сайт: всё, что когда-либо публиковалось, можно вернуть.</div>
+    </div>
+  </section>
+
+  <a class="back" href="/admin/">← Вернуться к управлению сайтом</a>
+</main>
+</body>
+</html>

@@ -1,0 +1,335 @@
+/*
+ * Оформление админки в стиле сайта: фиолетовый, жёлтый, крупный шрифт,
+ * большие кнопки, лишние технические элементы спрятаны.
+ *
+ * Decap CMS не даёт стабильных классов, поэтому используются селекторы
+ * вида [class*="ИмяКомпонента"] (имена компонентов есть в названиях классов).
+ * Если после обновления Decap что-то перестанет совпадать — админка просто
+ * вернётся к стандартному виду, ничего не сломается.
+ */
+:root {
+  --violet: #5b4bdb;
+  --violet-dark: #3a2fa3;
+  --violet-soft: #ece9ff;
+  --sun: #ffd23f;
+  --grass: #3dbe8b;
+  --pink: #ff8fb1;
+  --ink: #1b1747;
+  --mut: #5d5883;
+  --bg: #f5f3ff;
+}
+
+body {
+  background: var(--bg) !important;
+  font-family: Onest, system-ui, sans-serif !important;
+  color: var(--ink);
+}
+body *:not(code):not(pre) { font-family: inherit; }
+
+/* ── Верхняя полоса ─────────────────────────────────────────────── */
+[class*="AppHeader-css"] {
+  background: var(--violet) !important;
+  box-shadow: 0 4px 0 var(--violet-dark) !important;
+}
+[class*="AppHeaderNavList"] [class*="AppHeaderButton"],
+[class*="AppHeaderSiteLink"] {
+  color: #fff !important;
+  font-size: 17px !important;
+  font-weight: 500 !important;
+  border-radius: 99px !important;
+  padding: 8px 18px !important;
+  margin-right: 6px !important;
+}
+[class*="AppHeaderNavList"] [class*="AppHeaderButton"] svg { color: #fff !important; }
+[class*="AppHeaderNavList"] [class*="AppHeaderButton"]:hover { background: rgba(255,255,255,.18) !important; }
+[class*="AppHeaderNavList"] .header-link-active {
+  background: var(--sun) !important;
+  color: var(--ink) !important;
+}
+[class*="AppHeaderNavList"] .header-link-active svg { color: var(--ink) !important; }
+/* «Записи» → «Страницы сайта», «Медиафайлы» → «Все фото и файлы» */
+[class*="AppHeaderNavList"] > li:nth-child(1) [class*="AppHeaderButton"],
+[class*="AppHeaderNavList"] > li:nth-child(2) [class*="AppHeaderButton"] { font-size: 0 !important; }
+[class*="AppHeaderNavList"] > li:nth-child(1) [class*="AppHeaderButton"]::after { content: "Страницы сайта"; font-size: 17px; }
+[class*="AppHeaderNavList"] > li:nth-child(2) [class*="AppHeaderButton"]::after { content: "Все фото и файлы"; font-size: 17px; }
+[class*="AppHeaderSiteLink"] {
+  background: rgba(255,255,255,.15);
+}
+[class*="AppHeaderSiteLink"]:hover { background: rgba(255,255,255,.28); }
+[class*="AppHeaderTestRepoIndicator"] { color: #fff !important; }
+[class*="AppHeaderQuickNewButton"] { display: none !important; } /* «Быстрое добавление» не нужно */
+
+/* ── Левое меню разделов ────────────────────────────────────────── */
+[class*="SidebarContainer"] {
+  border-radius: 28px !important;
+  padding-bottom: 12px !important;
+  box-shadow: 0 6px 0 #e1dcff !important;
+}
+[class*="SidebarHeading"] { font-size: 0 !important; }
+[class*="SidebarHeading"]::after {
+  content: "Разделы сайта";
+  font: 700 18px Unbounded, Onest, sans-serif;
+  white-space: nowrap;
+  color: var(--ink);
+}
+[class*="SidebarNavLink"] {
+  font-size: 17px !important;
+  font-weight: 500 !important;
+  padding: 12px 18px !important;
+  margin: 2px 10px !important;
+  border-radius: 99px !important;
+  border-left: 0 !important;
+  color: var(--ink) !important;
+}
+[class*="SidebarNavLink"] svg,
+[class*="SidebarNavLink"] [class*="IconWrapper"] { display: none !important; } /* вместо иконки — эмодзи в названии */
+[class*="SidebarNavLink"]:hover { background: var(--violet-soft) !important; }
+[class*="SidebarNavLink"].sidebar-active {
+  background: var(--sun) !important;
+  font-weight: 700 !important;
+}
+[class*="SearchContainer"] { display: none !important; } /* поиск по 25 страницам не нужен */
+
+/* ── Шапка раздела ──────────────────────────────────────────────── */
+[class*="CollectionTopContainer"] {
+  border-radius: 28px !important;
+  background: var(--violet-soft) !important;
+  box-shadow: none !important;
+}
+[class*="CollectionTopHeading"] {
+  font: 700 26px Unbounded, Onest, sans-serif !important;
+  color: var(--ink) !important;
+}
+[class*="CollectionTopDescription"] {
+  font-size: 17px !important;
+  line-height: 1.5 !important;
+  color: var(--mut) !important;
+  max-width: 60ch;
+}
+[class*="ViewControlsSection"],
+[class*="SortControl"],
+[class*="FilterControl"],
+[class*="GroupControl"] { display: none !important; } /* переключатели вида/сортировки прячем */
+[class*="CollectionControlsContainer"] { min-height: 16px; }
+
+/* ── Карточки страниц ───────────────────────────────────────────── */
+[class*="ListCard-card"] {
+  border-radius: 22px !important;
+  margin-bottom: 12px !important;
+  box-shadow: 0 4px 0 #e1dcff !important;
+  transition: transform .25s cubic-bezier(.3,1.6,.5,1), box-shadow .2s;
+}
+[class*="ListCard-card"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 0 var(--sun) !important;
+}
+[class*="ListCardLink"] {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 26px !important;
+}
+[class*="ListCardLink"]::after {
+  content: "Изменить ✏️";
+  flex: none;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--sun);
+  padding: 8px 16px;
+  border-radius: 99px;
+}
+[class*="ListCardTitle"] {
+  font-size: 19px !important;
+  font-weight: 600 !important;
+  color: var(--ink) !important;
+}
+
+/* ── Редактор страницы ──────────────────────────────────────────── */
+[class*="ToolbarContainer"] {
+  min-height: 72px !important;
+  box-shadow: 0 3px 0 #e1dcff !important;
+}
+[class*="BackCollection"] { font-size: 15px !important; }
+[class*="BackStatus"] { font-size: 13px !important; }
+
+/* Главная кнопка «Опубликовать» — большая и зелёная */
+[class*="PublishButton"],
+[class*="ToolbarDropdown"] > [class*="DropdownButton"] {
+  background: var(--grass) !important;
+  color: #fff !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  height: auto !important;
+  padding: 12px 24px !important;
+  border-radius: 99px !important;
+  box-shadow: 0 4px 0 #2a8f67 !important;
+  text-transform: none !important;
+}
+[class*="DropdownList"] [class*="StyledMenuItem"] {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  padding: 14px 22px !important;
+  height: auto !important;
+}
+[class*="DropdownList"] [class*="StyledMenuItem"]:hover { background: var(--sun) !important; color: var(--ink) !important; }
+[class*="publishedButton"] {
+  font-size: 15px !important;
+  border-radius: 99px !important;
+}
+[class*="DeleteButton"],
+[class*="SaveButton"] {
+  border-radius: 99px !important;
+}
+
+/* Поля */
+[class*="ControlContainer"] { margin-top: 26px !important; }
+[class*="FieldLabel"] {
+  text-transform: none !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  padding: 8px 16px !important;
+  border-radius: 14px 14px 0 0 !important;
+  color: var(--ink) !important;
+  background: #e8e5f7 !important;
+}
+[class*="FieldLabel"][class*="labelActive"],
+[class*="FieldLabel"][class*="fieldLabelActive"] {
+  background: var(--violet) !important;
+  color: #fff !important;
+}
+[class*="ControlHint"] {
+  font-size: 15px !important;
+  line-height: 1.45 !important;
+  color: var(--mut) !important;
+  padding: 6px 4px 0 !important;
+}
+[class*="TextControl"],
+[class*="ControlContainer"] input[type="text"],
+[class*="ControlContainer"] textarea {
+  font-size: 17px !important;
+  line-height: 1.55 !important;
+  border-radius: 0 16px 16px 16px !important;
+}
+
+/* Кнопки «Добавить блок / фото / ссылку / файл» */
+[class*="AddButton"] {
+  background: var(--violet) !important;
+  color: #fff !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  padding: 9px 18px !important;
+  border-radius: 99px !important;
+  box-shadow: 0 3px 0 var(--violet-dark) !important;
+}
+[class*="AddButton"] svg { color: #fff !important; }
+
+/* Выбор фото и файла */
+[class*="FileWidgetButton"],
+[class*="ImageWrapper"] + div button,
+[class*="FileWidgetButtonRemove"] {
+  font-size: 15px !important;
+  border-radius: 99px !important;
+}
+[class*="FileWidgetButton"]:not([class*="Remove"]) {
+  background: var(--sun) !important;
+  color: var(--ink) !important;
+  font-weight: 700 !important;
+}
+[class*="ImageWrapper"] {
+  width: 180px !important;
+  height: 140px !important;
+  border-radius: 16px !important;
+  overflow: hidden;
+}
+
+/* Элементы списков (блоки, фото, ссылки) */
+[class*="ListItem"][class*="SortableListItem"] { border-radius: 16px !important; }
+[class*="StyledListItemTopBar"] {
+  border-radius: 16px 16px 0 0 !important;
+  background: #e8e5f7 !important;
+}
+[class*="NestedObjectLabel"] {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: var(--ink) !important;
+}
+[class*="TopBarContainer"] { border-radius: 14px !important; }
+
+/* ── Окно «Выбрать фото / файл» ─────────────────────────────────── */
+[class*="StyledModal"] { border-radius: 28px !important; grid-template-rows: auto minmax(0, 1fr) !important; }
+[class*="StyledModal"] [class*="ActionButton"] { display: none !important; } /* «Копировать», «Скачать» */
+[class*="StyledModal"] [class*="UploadButton"],
+[class*="StyledModal"] [class*="InsertButton"] {
+  font-size: 0 !important;
+  height: auto !important;
+  padding: 14px 24px !important;
+  border-radius: 99px !important;
+}
+[class*="StyledModal"] [class*="UploadButton"] {
+  background: var(--sun) !important;
+  color: var(--ink) !important;
+  box-shadow: 0 4px 0 #d9ac10 !important;
+}
+[class*="StyledModal"] [class*="UploadButton"]::after { content: "📤 1. Загрузить с компьютера"; font: 700 17px Onest, sans-serif; }
+[class*="StyledModal"] [class*="InsertButton"] {
+  background: var(--grass) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 0 #2a8f67 !important;
+}
+[class*="StyledModal"] [class*="InsertButton"]::after { content: "✅ 2. Вставить выбранное"; font: 700 17px Onest, sans-serif; }
+[class*="StyledModal"] [class*="InsertButton"][class*="disabled"][disabled] { opacity: .45; box-shadow: none !important; }
+[class*="StyledModal"] [class*="UploadButton"] > span { display: none !important; }
+[class*="StyledModal"] [class*="LibraryTop"] { height: auto !important; padding-bottom: 8px; }
+[class*="StyledModal"] [class*="RowContainer"] { height: auto !important; }
+[class*="StyledModal"] [class*="LibraryTitle"] { font: 700 22px Unbounded, Onest, sans-serif !important; }
+[class*="StyledModal"] [class*="ButtonsContainer"] {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  height: auto !important;
+  margin: 12px 0 16px !important;
+}
+[class*="StyledModal"] [class*="ButtonsContainer"] > * { margin: 0 !important; }
+[class*="StyledModal"] [class*="DeleteButton"] { order: 2; font-size: 14px !important; border-radius: 99px !important; }
+[class*="CardImageWrapper"], [class*="CardImage"] { border-radius: 14px !important; }
+
+/* Кнопки «Выберите изображение / файл» в полях */
+[class*="FileWidgetButton"] {
+  font-size: 16px !important;
+  padding: 10px 20px !important;
+  border-radius: 99px !important;
+  margin-right: 8px !important;
+}
+
+/* Свёрнутый блок можно открыть кликом по названию (см. admin.js) */
+[class*="SortableListItem"] [class*="NestedObjectLabel"] { cursor: pointer; }
+[class*="SortableListItem"] [class*="NestedObjectLabel"]::after {
+  content: "  — нажмите, чтобы открыть";
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--mut);
+}
+
+/* ── Кнопка «Помощь» ────────────────────────────────────────────── */
+#help-fab {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 9999;
+  background: var(--sun);
+  color: var(--ink);
+  font: 700 17px Onest, system-ui, sans-serif;
+  text-decoration: none;
+  padding: 14px 22px;
+  border-radius: 99px;
+  box-shadow: 0 5px 0 #d9ac10, 0 10px 24px rgba(40,25,120,.25);
+  transition: transform .25s cubic-bezier(.3,1.6,.5,1);
+}
+#help-fab:hover { transform: translateY(-3px) rotate(-2deg); }
+
+@media (max-width: 799px) {
+  #help-fab { right: 12px; bottom: 12px; padding: 10px 16px; font-size: 15px; }
+}

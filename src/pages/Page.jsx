@@ -45,6 +45,26 @@ function LinkList({ links }) {
   )
 }
 
+// Фото из CMS: {src, caption}. Старый формат (просто строка-адрес) тоже поддерживается.
+function Gallery({ images }) {
+  const list = (images || [])
+    .map((img) => (typeof img === 'string' ? { src: img } : img))
+    .filter((img) => img?.src)
+  if (!list.length) return null
+  return (
+    <div className="image-grid">
+      {list.map((img, i) => (
+        <figure key={i}>
+          <a href={img.src} target="_blank" rel="noopener noreferrer">
+            <img src={img.src} alt={img.caption || ''} loading="lazy" />
+          </a>
+          {img.caption && <figcaption>{img.caption}</figcaption>}
+        </figure>
+      ))}
+    </div>
+  )
+}
+
 export default function Page() {
   const params = useParams()
   const slug = params['*'] || ''
@@ -89,18 +109,13 @@ export default function Page() {
         <div className="section" key={i}>
           <h2>{section.heading}</h2>
           {section.body && <p className="prose">{section.body}</p>}
+          <Gallery images={section.images} />
           <LinkList links={section.links} />
           <DocList docs={section.docs} />
         </div>
       ))}
 
-      {data.images?.length > 0 && (
-        <div className="image-grid">
-          {data.images.map((src, i) => (
-            <img key={i} src={src} alt="" loading="lazy" />
-          ))}
-        </div>
-      )}
+      <Gallery images={data.images} />
 
       <DocList docs={data.docs} />
 

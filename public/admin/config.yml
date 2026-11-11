@@ -1,166 +1,261 @@
-# Decap CMS: одна страница = один файл в src/content/pages
+# ─────────────────────────────────────────────────────────────────────────────
+#  Decap CMS — «Управление сайтом»
+#
+#  Главная идея: админка повторяет меню сайта. Слева — те же разделы, что и на
+#  сайте (с иконками), внутри — страницы этого раздела. У каждого поля есть
+#  понятное название и подсказка, технические настройки спрятаны.
+#
+#  Формат файлов в src/content/ НЕ изменился (добавились только необязательные
+#  поля для фото), поэтому старые страницы открываются без переделок.
+# ─────────────────────────────────────────────────────────────────────────────
 backend:
   name: github
   repo: Suhova01/portfolio-site
   branch: main
   base_url: https://decap-proxy.asuhova.workers.dev
   auth_endpoint: auth
+  # понятные сообщения в истории GitHub вместо «Update Pages "home"»
+  commit_messages:
+    update: "Изменена страница «{{slug}}»"
+    uploadMedia: "Загружен файл {{path}}"
+    deleteMedia: "Удалён файл {{path}}"
+
 locale: ru
 local_backend: true   # локально: npx decap-server, тогда вход через GitHub не нужен
+logo_url: /admin/logo.svg
+site_url: /
+display_url: /
+
 media_folder: public/images
 public_folder: /images
+
+# ── Готовые «кирпичики» полей. Ниже они собираются в страницы через *ссылки ──
+x-fields:
+  - &f_title
+    label: "✏️ Название страницы"
+    name: title
+    widget: string
+    hint: "Большой заголовок в самом верху страницы."
+
+  - &f_eyebrow
+    label: "🏷️ Маленькая подпись над названием"
+    name: eyebrow
+    widget: string
+    required: false
+    hint: "Например: «Моя группа»."
+
+  - &f_intro
+    label: "💬 Короткое вступление"
+    name: intro
+    widget: text
+    required: false
+    hint: "Одно-два предложения под названием."
+
+  - &f_photos
+    label: "🖼️ Фотографии"
+    label_singular: "фото"
+    name: images
+    widget: list
+    required: false
+    collapsed: false
+    summary: "{{fields.caption}}"
+    hint: "Нажмите «Добавить фото» → «Выберите изображение» → «1. Загрузить с компьютера» → «2. Вставить выбранное»."
+    fields:
+      - label: "Фото"
+        name: src
+        widget: image
+        choose_url: false
+      - label: "Подпись под фото"
+        name: caption
+        widget: string
+        required: false
+
+  - &f_links
+    label: "🔗 Ссылки"
+    label_singular: "ссылку"
+    name: links
+    widget: list
+    required: false
+    collapsed: true
+    summary: "{{fields.title}}"
+    fields:
+      - label: "Как будет называться ссылка"
+        name: title
+        widget: string
+        hint: "Например: «Смотреть видео на YouTube»."
+      - label: "Адрес ссылки"
+        name: url
+        widget: string
+        hint: "Скопируйте адрес из браузера и вставьте сюда. Он начинается с https://"
+        pattern: ['^(https?://|/|mailto:)', "Адрес должен начинаться с https://"]
+
+  - &f_docs
+    label: "📎 Файлы для скачивания"
+    label_singular: "файл"
+    name: docs
+    widget: list
+    required: false
+    collapsed: true
+    summary: "{{fields.name}}"
+    hint: "Word, PDF, презентации. Посетители сайта смогут их скачать."
+    fields:
+      - label: "Название файла на сайте"
+        name: name
+        widget: string
+        hint: "Например: «Конспект занятия „Снеговик“»."
+      - label: "Сам файл"
+        name: url
+        widget: file
+        required: false
+        choose_url: false
+        hint: "Если файла пока нет — оставьте пустым, на сайте будет «Файл скоро появится»."
+
+  - &f_sections
+    label: "📝 Блоки на странице"
+    label_singular: "блок"
+    name: sections
+    widget: list
+    required: false
+    collapsed: true
+    summary: "{{fields.heading}}"
+    hint: "Страница состоит из блоков: заголовок, текст, фото, ссылки и файлы. Нажмите на название блока, чтобы открыть его. Чтобы поменять порядок — потяните блок за полоски ═ сверху. Крестик ✕ удаляет блок."
+    fields:
+      - label: "Заголовок блока"
+        name: heading
+        widget: string
+      - label: "Текст"
+        name: body
+        widget: text
+        required: false
+        hint: "Пишите как обычно. Новая строка — клавиша Enter."
+      - *f_photos
+      - *f_links
+      - *f_docs
+
+  - &f_hub
+    # Разделы с подстраницами: список подразделов строится сам, менять нечего
+    name: children
+    widget: hidden
+    default: true
+
+x-page: &page_fields
+  - *f_title
+  - *f_eyebrow
+  - *f_intro
+  - *f_sections
+
+x-hub: &hub_fields
+  - *f_title
+  - *f_eyebrow
+  - *f_intro
+  - *f_sections
+  - *f_hub
+
+# ─────────────────────────────── РАЗДЕЛЫ ─────────────────────────────────────
 collections:
-  - name: pages
-    label: Страницы сайта
+  - name: home
+    label: "🏠 Главная"
+    label_singular: "Главная"
+    description: "Первая страница, которую видят все гости сайта. Нажмите на неё, чтобы изменить."
+    delete: false
     files:
       - name: "home"
-        label: "Главная"
+        label: "🏠 Главная страница"
         file: "src/content/pages/home.json"
-        fields: &page_fields
-          - {label: "Заголовок", name: title, widget: string}
-          - {label: "Рубрика над заголовком", name: eyebrow, widget: string, required: false}
-          - {label: "Вводный текст", name: intro, widget: text, required: false}
-          - label: "Блоки текста"
-            name: sections
-            widget: list
+        fields:
+          - *f_title
+          - *f_intro
+          - *f_sections
+          - label: "📮 Показывать форму «Напишите мне» внизу страницы"
+            name: showContactForm
+            widget: boolean
             required: false
-            fields:
-              - {label: "Заголовок блока", name: heading, widget: string}
-              - {label: "Текст", name: body, widget: text, required: false}
-              - label: "Ссылки"
-                name: links
-                widget: list
-                required: false
-                fields:
-                  - {label: "Название", name: title, widget: string}
-                  - {label: "Адрес", name: url, widget: string}
-              - label: "Документы"
-                name: docs
-                widget: list
-                required: false
-                fields:
-                  - {label: "Название", name: name, widget: string}
-                  - {label: "Файл", name: url, widget: file, required: false}
-          - label: "Фотографии"
-            name: images
-            widget: list
-            required: false
-            field: {label: "Фото", name: image, widget: image}
-          - label: "Документы для скачивания"
-            name: docs
-            widget: list
-            required: false
-            fields:
-              - {label: "Название", name: name, widget: string}
-              - {label: "Файл", name: url, widget: file, required: false}
-          - {label: "Показать форму обратной связи", name: showContactForm, widget: boolean, required: false, default: false}
-          - {label: "Раздел-хаб (список подразделов)", name: children, widget: boolean, required: false, default: false}
-      - name: "portfolio"
-        label: "Портфолио"
-        file: "src/content/pages/portfolio.json"
-        fields: *page_fields
-      - name: "portfolio-biografiya"
-        label: "Портфолио / Информация обо мне"
-        file: "src/content/pages/portfolio/biografiya.json"
-        fields: *page_fields
-      - name: "portfolio-dostizheniya"
-        label: "Портфолио / Мои достижения"
-        file: "src/content/pages/portfolio/dostizheniya.json"
-        fields: *page_fields
-      - name: "portfolio-dostizheniya-vospitannikov"
-        label: "Портфолио / Достижения воспитанников"
-        file: "src/content/pages/portfolio/dostizheniya-vospitannikov.json"
-        fields: *page_fields
-      - name: "portfolio-konferentsii"
-        label: "Портфолио / Конференции, фестивали"
-        file: "src/content/pages/portfolio/konferentsii.json"
-        fields: *page_fields
-      - name: "portfolio-metod-obedineniya"
-        label: "Портфолио / Методические объединения"
-        file: "src/content/pages/portfolio/metod-obedineniya.json"
-        fields: *page_fields
-      - name: "portfolio-kvalifikatsiya"
-        label: "Портфолио / Повышение квалификации"
-        file: "src/content/pages/portfolio/kvalifikatsiya.json"
-        fields: *page_fields
-      - name: "portfolio-samorazvitie"
-        label: "Портфолио / Саморазвитие"
-        file: "src/content/pages/portfolio/samorazvitie.json"
-        fields: *page_fields
-      - name: "portfolio-publikatsii"
-        label: "Портфолио / Публикации"
-        file: "src/content/pages/portfolio/publikatsii.json"
-        fields: *page_fields
-      - name: "metodika"
-        label: "Методическая копилка"
-        file: "src/content/pages/metodika.json"
-        fields: *page_fields
-      - name: "metodika-razrabotki"
-        label: "Методическая копилка / Методические разработки"
-        file: "src/content/pages/metodika/razrabotki.json"
-        fields: *page_fields
-      - name: "metodika-avtorskie-raboty"
-        label: "Методическая копилка / Авторские работы"
-        file: "src/content/pages/metodika/avtorskie-raboty.json"
-        fields: *page_fields
-      - name: "metodika-prezentatsii"
-        label: "Методическая копилка / Мои презентации"
-        file: "src/content/pages/metodika/prezentatsii.json"
-        fields: *page_fields
-      - name: "metodika-stsenarii"
-        label: "Методическая копилка / Сценарии праздников"
-        file: "src/content/pages/metodika/stsenarii.json"
-        fields: *page_fields
-      - name: "metodika-roditelskie-sobraniya"
-        label: "Методическая копилка / Родительские собрания"
-        file: "src/content/pages/metodika/roditelskie-sobraniya.json"
-        fields: *page_fields
-      - name: "metodika-dokumenty"
-        label: "Методическая копилка / Нормативные документы"
-        file: "src/content/pages/metodika/dokumenty.json"
-        fields: *page_fields
-      - name: "roditelyam"
-        label: "Для вас, родители"
-        file: "src/content/pages/roditelyam.json"
-        fields: *page_fields
-      - name: "gruppa"
-        label: "Моя группа"
-        file: "src/content/pages/gruppa.json"
-        fields: *page_fields
-      - name: "gruppa-rpps"
-        label: "Моя группа / РППС"
-        file: "src/content/pages/gruppa/rpps.json"
-        fields: *page_fields
-      - name: "gruppa-foto"
-        label: "Моя группа / Фотогалерея"
-        file: "src/content/pages/gruppa/foto.json"
-        fields: *page_fields
-      - name: "gruppa-muzei"
-        label: "Моя группа / Мини-музеи"
-        file: "src/content/pages/gruppa/muzei.json"
-        fields: *page_fields
-      - name: "video"
-        label: "Видеогалерея"
-        file: "src/content/pages/video.json"
-        fields: *page_fields
-      - name: "ssylki"
-        label: "Полезные ссылки"
-        file: "src/content/pages/ssylki.json"
-        fields: *page_fields
-  - name: settings
-    label: Настройки
+            default: true
+
+  - name: about
+    label: "👩‍🏫 Обо мне"
+    description: "Ваше фото, имя и контакты. Они видны слева на каждой странице сайта."
+    delete: false
     files:
       - name: profile
-        label: "Профиль воспитателя"
+        label: "👩‍🏫 Моё фото, имя и контакты"
         file: "src/content/site.json"
         fields:
-          - label: "Профиль"
+          - label: "Обо мне"
             name: person
             widget: object
+            collapsed: false
             fields:
-              - {label: "ФИО", name: name, widget: string}
-              - {label: "Должность", name: role, widget: string}
-              - {label: "Место работы", name: org, widget: string}
-              - {label: "Местоположение", name: location, widget: string}
-              - {label: "Эл. почта", name: email, widget: string}
-              - {label: "Фото профиля", name: photo, widget: image, required: false}
+              - label: "📷 Моё фото"
+                name: photo
+                widget: image
+                required: false
+                choose_url: false
+                hint: "Лучше квадратное, где хорошо видно лицо."
+              - {label: "Фамилия, имя, отчество", name: name, widget: string}
+              - {label: "Должность", name: role, widget: string, hint: "Например: «Воспитатель»."}
+              - {label: "Где я работаю", name: org, widget: string}
+              - {label: "Город / село", name: location, widget: string}
+              - label: "Электронная почта"
+                name: email
+                widget: string
+                hint: "Сюда будут писать родители и коллеги."
+
+  - name: portfolio
+    label: "📁 Портфолио"
+    description: "Выберите страницу, которую хотите изменить."
+    delete: false
+    files:
+      - {name: "portfolio", label: "📂 Портфолио — вступление к разделу", file: "src/content/pages/portfolio.json", fields: *hub_fields}
+      - {name: "portfolio-biografiya", label: "📄 Информация обо мне", file: "src/content/pages/portfolio/biografiya.json", fields: *page_fields}
+      - {name: "portfolio-dostizheniya", label: "🏆 Мои достижения", file: "src/content/pages/portfolio/dostizheniya.json", fields: *page_fields}
+      - {name: "portfolio-dostizheniya-vospitannikov", label: "⭐ Достижения воспитанников", file: "src/content/pages/portfolio/dostizheniya-vospitannikov.json", fields: *page_fields}
+      - {name: "portfolio-konferentsii", label: "🎤 Конференции, фестивали", file: "src/content/pages/portfolio/konferentsii.json", fields: *page_fields}
+      - {name: "portfolio-metod-obedineniya", label: "🤝 Методические объединения", file: "src/content/pages/portfolio/metod-obedineniya.json", fields: *page_fields}
+      - {name: "portfolio-kvalifikatsiya", label: "🎓 Повышение квалификации", file: "src/content/pages/portfolio/kvalifikatsiya.json", fields: *page_fields}
+      - {name: "portfolio-samorazvitie", label: "🌱 Саморазвитие", file: "src/content/pages/portfolio/samorazvitie.json", fields: *page_fields}
+      - {name: "portfolio-publikatsii", label: "📰 Публикации", file: "src/content/pages/portfolio/publikatsii.json", fields: *page_fields}
+
+  - name: metodika
+    label: "📚 Методическая копилка"
+    description: "Выберите страницу, которую хотите изменить. Сюда удобно добавлять файлы для скачивания."
+    delete: false
+    files:
+      - {name: "metodika", label: "📂 Методическая копилка — вступление к разделу", file: "src/content/pages/metodika.json", fields: *hub_fields}
+      - {name: "metodika-razrabotki", label: "📝 Методические разработки", file: "src/content/pages/metodika/razrabotki.json", fields: *page_fields}
+      - {name: "metodika-avtorskie-raboty", label: "✨ Авторские работы", file: "src/content/pages/metodika/avtorskie-raboty.json", fields: *page_fields}
+      - {name: "metodika-prezentatsii", label: "🖥️ Мои презентации", file: "src/content/pages/metodika/prezentatsii.json", fields: *page_fields}
+      - {name: "metodika-stsenarii", label: "🎉 Сценарии праздников", file: "src/content/pages/metodika/stsenarii.json", fields: *page_fields}
+      - {name: "metodika-roditelskie-sobraniya", label: "👪 Родительские собрания", file: "src/content/pages/metodika/roditelskie-sobraniya.json", fields: *page_fields}
+      - {name: "metodika-dokumenty", label: "📋 Нормативные документы", file: "src/content/pages/metodika/dokumenty.json", fields: *page_fields}
+
+  - name: roditelyam
+    label: "👨‍👩‍👧 Для вас, родители"
+    description: "Нажмите на страницу, чтобы изменить её."
+    delete: false
+    files:
+      - {name: "roditelyam", label: "👨‍👩‍👧 Для вас, родители", file: "src/content/pages/roditelyam.json", fields: *page_fields}
+
+  - name: gruppa
+    label: "🧸 Моя группа"
+    description: "Здесь фотогалерея группы. Чтобы добавить фото: откройте страницу → откройте блок → «Добавить фото»."
+    delete: false
+    files:
+      - {name: "gruppa", label: "📂 Моя группа — вступление к разделу", file: "src/content/pages/gruppa.json", fields: *hub_fields}
+      - {name: "gruppa-foto", label: "📸 Фотогалерея", file: "src/content/pages/gruppa/foto.json", fields: *page_fields}
+      - {name: "gruppa-rpps", label: "🏡 РППС (развивающая среда)", file: "src/content/pages/gruppa/rpps.json", fields: *page_fields}
+      - {name: "gruppa-muzei", label: "🏺 Мини-музеи", file: "src/content/pages/gruppa/muzei.json", fields: *page_fields}
+
+  - name: video
+    label: "🎬 Видеогалерея"
+    description: "Видео добавляются ссылками: загрузите ролик на YouTube, ВК или Яндекс.Диск и вставьте ссылку в блок."
+    delete: false
+    files:
+      - {name: "video", label: "🎬 Видеогалерея", file: "src/content/pages/video.json", fields: *page_fields}
+
+  - name: ssylki
+    label: "🔗 Полезные ссылки"
+    description: "Нажмите на страницу, чтобы добавить или убрать ссылки."
+    delete: false
+    files:
+      - {name: "ssylki", label: "🔗 Полезные ссылки", file: "src/content/pages/ssylki.json", fields: *page_fields}

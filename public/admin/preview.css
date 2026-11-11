@@ -1,0 +1,29 @@
+/* Предпросмотр в админке: та же внешность, что у сайта (src/styles/global.css) */
+:root{--bg:#f5f3ff;--ink:#1b1747;--mut:#5d5883;--card:#fff;--violet:#5b4bdb;--sun:#ffd23f;--grass:#3dbe8b;--pink:#ff8fb1;--fix:#1b1747}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 Onest,system-ui,sans-serif}
+h1,h2,h3{font-family:Unbounded,'Arial Black',sans-serif;line-height:1.1;letter-spacing:-.02em;margin:0 0 .6em}
+h1{font-size:2.2rem;font-weight:900}
+h2{font-size:1.4rem}
+p{margin:0 0 1em;max-width:68ch}
+a{color:inherit}
+.muted{color:var(--mut)}
+.preview{padding:28px 32px 60px}
+.preview-badge{display:inline-block;font-size:.85rem;font-weight:500;color:var(--mut);background:#fff;border:2px dashed #d6d0ff;padding:6px 14px;border-radius:99px;margin-bottom:22px}
+.preview-note{background:#fff;border:2px dashed #d6d0ff;border-radius:20px;padding:14px 20px;color:var(--mut)}
+.page-header{margin-bottom:10px}
+.eyebrow{display:inline-block;background:var(--sun);color:var(--fix);font-weight:700;font-size:.85rem;padding:4px 14px;border-radius:99px;margin-bottom:14px;rotate:-2deg}
+.section{margin-top:32px}
+.prose{white-space:pre-line}
+.image-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:16px}
+.image-grid figure{margin:0}
+.image-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:20px;display:block;background:#e8e5f7}
+.image-grid figcaption{margin-top:6px;font-size:.9rem;color:var(--mut);text-align:center}
+.link-list,.doc-list{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px;max-width:680px}
+.link-list a{display:block;background:var(--card);padding:12px 20px;border-radius:16px;font-weight:500;text-decoration:none}
+.doc-list li{display:flex;justify-content:space-between;gap:16px;background:var(--card);padding:14px 20px;border-radius:18px}
+.doc-list a{font-weight:700}
+.sidebar-preview{width:300px;background:var(--violet);color:#fff;padding:28px 18px;border-radius:0 40px 40px 0;text-align:center}
+.sidebar-photo{width:96px;height:96px;border-radius:50% 50% 50% 14px;object-fit:cover;background:var(--sun);display:grid;place-items:center;font-size:2.6rem;margin:0 auto 12px;rotate:-4deg}
+.sidebar-name{font:700 1.05rem Unbounded,sans-serif;line-height:1.25;margin-bottom:6px}
+.sidebar-role{font-size:.9rem;opacity:.85}
