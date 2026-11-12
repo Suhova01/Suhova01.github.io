@@ -84,7 +84,7 @@ export default function Page() {
   return (
     <article>
       {slug === '' ? (
-        <Hero title={data.title} intro={data.intro} />
+        <Hero title={data.title} intro={data.intro} person={site.person} />
       ) : (
         <div className="page-header">
           {data.eyebrow && <div className="eyebrow">{data.eyebrow}</div>}
