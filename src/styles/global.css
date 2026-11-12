@@ -64,22 +64,19 @@ a{color:inherit}
 .btn-primary:disabled{opacity:.6;cursor:wait}
 
 /* главная */
-.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center;margin-bottom:10px}
 .hero h1{font-size:clamp(2.1rem,5vw,3.8rem)}
 .w{display:inline-block;opacity:0;animation:drop .8s cubic-bezier(.3,1.6,.5,1) forwards;animation-delay:calc(var(--i)*.1s + .15s)}
 .w.hl{background:var(--sun);color:var(--fix);padding:0 .18em;border-radius:.25em;rotate:-2deg}
 @keyframes drop{from{opacity:0;transform:translateY(-.9em) rotate(-8deg)}to{opacity:1;transform:none}}
 .lead{margin-top:22px;color:var(--mut);font-size:1.12rem;max-width:46ch}
-.stage{position:relative;display:grid;place-items:center;min-height:340px}
-.stage::before{content:"";position:absolute;width:88%;aspect-ratio:1;border-radius:46% 54% 58% 42%/52% 44% 56% 48%;background:var(--violet);opacity:.14;animation:morph 14s ease-in-out infinite alternate}
-@keyframes morph{to{border-radius:58% 42% 44% 56%/42% 58% 42% 58%;transform:rotate(25deg)}}
-.namecard{position:relative;max-width:380px;background:var(--violet);color:#fff;padding:clamp(24px,3.5vw,38px);border-radius:46px 46px 46px 12px;rotate:-2deg;box-shadow:0 12px 0 #3a2fa3}
-.namecard-role{display:inline-block;background:var(--sun);color:var(--fix);font-weight:700;font-size:.85rem;padding:4px 14px;border-radius:99px;rotate:3deg;margin-bottom:18px}
-.namecard-name{display:grid;gap:.15em;font:700 clamp(1.3rem,2.4vw,1.9rem)/1.1 Unbounded,sans-serif;letter-spacing:-.02em;overflow-wrap:anywhere}
+
+.hero{margin-bottom:10px}
+.namecard{position:relative;overflow:hidden;margin-top:34px;background:radial-gradient(circle at 94% 18%,rgba(255,210,63,.28) 0 58px,transparent 59px),radial-gradient(circle at 86% 96%,rgba(255,143,177,.3) 0 44px,transparent 45px),var(--violet);color:#fff;padding:clamp(20px,3vw,34px) clamp(20px,3.5vw,40px);border-radius:40px 40px 40px 12px;rotate:-1deg;box-shadow:0 10px 0 #3a2fa3}
+.namecard-role{display:inline-block;background:var(--sun);color:var(--fix);font-weight:700;font-size:.85rem;padding:4px 14px;border-radius:99px;rotate:-2deg;margin-bottom:14px}
+.namecard-name{display:flex;flex-wrap:wrap;column-gap:.35em;row-gap:.1em;font:700 clamp(1.15rem,7vw,2.1rem)/1.15 Unbounded,sans-serif;letter-spacing:-.02em}
 .namecard-name span{display:block;opacity:0;animation:drop .8s cubic-bezier(.3,1.6,.5,1) forwards;animation-delay:calc(var(--i)*.1s + .15s)}
 .namecard-name span:nth-child(2){color:var(--sun)}
-.namecard-org{margin-top:20px;font-size:.95rem;opacity:.85}
-@media (max-width:1180px){.hero{grid-template-columns:1fr}}
+.namecard-org{margin-top:14px;font-size:.95rem;opacity:.85}
 
 /* мобильная версия */
 @media (max-width:860px){
