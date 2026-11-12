@@ -73,13 +73,12 @@ a{color:inherit}
 .stage{position:relative;display:grid;place-items:center;min-height:340px}
 .stage::before{content:"";position:absolute;width:88%;aspect-ratio:1;border-radius:46% 54% 58% 42%/52% 44% 56% 48%;background:var(--violet);opacity:.14;animation:morph 14s ease-in-out infinite alternate}
 @keyframes morph{to{border-radius:58% 42% 44% 56%/42% 58% 42% 58%;transform:rotate(25deg)}}
-.bell{all:unset;cursor:pointer;position:relative;display:block;width:min(300px,80%);-webkit-tap-highlight-color:transparent}
-.bell:focus-visible{outline:3px solid var(--violet);outline-offset:6px;border-radius:24px}
-.bell svg{width:100%;display:block;transform-origin:50% 5%;animation:sway 5s ease-in-out infinite;filter:drop-shadow(0 18px 18px rgba(40,25,120,.25))}
-@keyframes sway{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
-.hint{position:absolute;right:2%;bottom:6%;background:var(--sun);color:var(--fix);font-weight:700;font-size:.95rem;padding:8px 16px;border-radius:99px;rotate:6deg;transition:opacity .4s,transform .4s;pointer-events:none}
-.hint.off{opacity:0;transform:scale(.6)}
-.bit{position:absolute;pointer-events:none;border-radius:50%}
+.namecard{position:relative;max-width:380px;background:var(--violet);color:#fff;padding:clamp(24px,3.5vw,38px);border-radius:46px 46px 46px 12px;rotate:-2deg;box-shadow:0 12px 0 #3a2fa3}
+.namecard-role{display:inline-block;background:var(--sun);color:var(--fix);font-weight:700;font-size:.85rem;padding:4px 14px;border-radius:99px;rotate:3deg;margin-bottom:18px}
+.namecard-name{display:grid;gap:.15em;font:700 clamp(1.3rem,2.4vw,1.9rem)/1.1 Unbounded,sans-serif;letter-spacing:-.02em;overflow-wrap:anywhere}
+.namecard-name span{display:block;opacity:0;animation:drop .8s cubic-bezier(.3,1.6,.5,1) forwards;animation-delay:calc(var(--i)*.1s + .15s)}
+.namecard-name span:nth-child(2){color:var(--sun)}
+.namecard-org{margin-top:20px;font-size:.95rem;opacity:.85}
 @media (max-width:1180px){.hero{grid-template-columns:1fr}}
 
 /* мобильная версия */
@@ -90,7 +89,7 @@ a{color:inherit}
   .sidebar{position:fixed;inset:0 auto 0 0;z-index:40;width:min(320px,88vw);padding-top:84px;transform:translateX(-105%);transition:transform .35s cubic-bezier(.3,1.2,.5,1)}
   .sidebar.open{transform:none}
 }
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.w{opacity:1}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.w,.namecard-name span{opacity:1}html{scroll-behavior:auto}}
 
 .prose{white-space:pre-line}
 .link-list{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px;max-width:680px}
